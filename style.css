@@ -1,0 +1,539 @@
+:root {
+    --primary: #1E6139;
+    --primary-light: #2D8B54;
+    --secondary: #E8F5E9;
+    --text: #1B2E20;
+    --text-muted: #5D7A65;
+    --white: #FFFFFF;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --border-radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f4f1;
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    height: -webkit-fill-available;
+    width: 100vw;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%; /* Prevent font size adjustment on orientation change */
+}
+
+button {
+    touch-action: manipulation; /* Prevent double-tap zoom delay */
+}
+
+h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+#app-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--white);
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,0,0,0.1);
+    
+    /* PWA/Mobile optimizations */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Screens Management */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    transform: translateX(20px);
+    background-color: var(--white);
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    z-index: 10;
+}
+
+.content {
+    flex: 1;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.scrollable {
+    overflow-y: auto;
+    justify-content: flex-start;
+}
+
+/* TELA-01: Welcome */
+#screen-welcome {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5FAF6 100%);
+}
+
+.logo-container h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-top: 10px;
+}
+
+.app-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(30, 97, 57, 0.2));
+}
+
+.welcome-text {
+    margin: 40px 0;
+}
+
+.welcome-text h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.welcome-text p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 18px 60px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(30, 97, 57, 0.3);
+    transition: var(--transition);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+    background-color: var(--primary-light);
+}
+
+.footer-note {
+    padding: 20px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    opacity: 0.7;
+    text-align: center;
+    background-color: var(--secondary);
+    width: 100%;
+}
+
+/* TELA-02: Tutorial */
+.tutorial-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 50px;
+}
+
+.tutorial-title span {
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
+.tutorial-steps {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 60px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    background: var(--secondary);
+    padding: 12px 20px;
+    border-radius: 50px;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.step-text {
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.tutorial-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* TELA-03: Camera */
+#screen-camera {
+    background-color: #000;
+}
+
+.camera-header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 20;
+}
+
+.icon-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    backdrop-filter: blur(10px);
+}
+
+.camera-viewfinder {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#camera-stream {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camera-overlay {
+    position: absolute;
+    border: 2px solid rgba(255,255,255,0.5);
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    box-shadow: 0 0 0 2000px rgba(0,0,0,0.4);
+}
+
+.camera-footer {
+    height: 180px;
+    background: #111;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 30px;
+    position: relative;
+}
+
+.camera-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    gap: 8px;
+}
+
+.camera-action-item i {
+    font-size: 1.5rem;
+}
+
+.camera-action-item span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.capture-btn {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    border: 5px solid #333;
+    cursor: pointer;
+    justify-self: center;
+    transition: var(--transition);
+}
+
+.capture-btn:active {
+    transform: scale(0.9);
+}
+
+.capture-label {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* TELA-04: Result */
+.app-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 50px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.result-success-card {
+    background-color: #f8fff9;
+    border: 1px solid #e0f2e3;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.success-icon {
+    color: #2D8B54;
+    font-size: 1.8rem;
+}
+
+.success-text h3 {
+    font-size: 1rem;
+    color: #1B2E20;
+}
+
+.success-text p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.result-image-container {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    background: #eee;
+}
+
+.result-image-container img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.result-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.main-info {
+    text-align: left;
+}
+
+.identification-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.main-info h2 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.main-info p {
+    font-weight: 500;
+}
+
+.info-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 15px 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--secondary);
+    color: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-content {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.info-value {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.info-status-icon {
+    color: #E57373;
+    font-size: 1.2rem;
+}
+
+.about-card {
+    text-align: left;
+}
+
+.about-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.about-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.btn-primary.secondary-style {
+    background: #234E33;
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+}
+
+/* AI Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.processing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--secondary);
+    border-top: 5px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.screen.active .content {
+    animation: fadeIn 0.5s ease forwards;
+}
