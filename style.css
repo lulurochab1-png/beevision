@@ -537,3 +537,59 @@ h1, h2, h3 {
 .screen.active .content {
     animation: fadeIn 0.5s ease forwards;
 }
+/* Correção iPhone / Safari */
+html, body {
+    min-height: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    min-height: 100dvh;
+}
+
+#app-container {
+    min-height: 100dvh;
+    height: auto;
+    overflow: hidden;
+}
+
+.screen {
+    min-height: 100dvh;
+    height: auto;
+    overflow-y: auto;
+}
+
+#screen-welcome .content {
+    justify-content: flex-start;
+    padding-top: 80px;
+    padding-bottom: 120px;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-logo {
+    display: block;
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+}
+
+.welcome-text {
+    margin: 25px 0;
+}
+
+.footer-note {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
