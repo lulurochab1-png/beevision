@@ -54,12 +54,12 @@ const App = {
     },
 
     async startCamera() {
-        const video = document.getElementById('camera-stream');
-        try {
-            this.stream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'environment' },
-                audio: false
-            });
+    const video = document.getElementById('camera-stream');
+    try {
+        this.stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+        });
             video.srcObject = this.stream;
         } catch (err) {
             console.error("Erro ao acessar câmera: ", err);
@@ -117,7 +117,14 @@ const App = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => App.init());
+window.onload = () => {
+    try {
+        App.init();
+    } catch (err) {
+        console.error(err);
+        alert('Erro ao iniciar: ' + err.message);
+    }
+};
 
 // Registro do Service Worker para PWA
 if ('serviceWorker' in navigator) {
@@ -127,6 +134,4 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log('Erro ao registrar Service Worker:', err));
     });
 }
-window.addEventListener('error', function (e) {
-  alert('Erro no app: ' + e.message);
-});
+
