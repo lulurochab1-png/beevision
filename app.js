@@ -127,3 +127,6 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log('Erro ao registrar Service Worker:', err));
     });
 }
+window.addEventListener('error', function (e) {
+  alert('Erro no app: ' + e.message);
+});
